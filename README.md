@@ -1,7 +1,7 @@
 # Rate-my-desktop
 
 # READ ME!!
-This script has been patched. Welp, it was fun while it lasted. (EDIT: Fixed the script... because AI Made.)
+This script has been recovered! because the AI built it
 # About it
 Rate my desktop (rate my avatar 2 screenshare) is a Python and exploit script
 Where can you put ur desktop screen into ROBLOX
