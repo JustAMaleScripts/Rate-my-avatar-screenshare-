@@ -1,15 +1,25 @@
-function update(text)
-    local args = {
-        [1] = "Update",
-        [2] = {
-            ["DescriptionText"] = text,
-            ["ImageId"] = 0
-        }
-    }
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Remotes = ReplicatedStorage:WaitForChild("Remotes")
+local UpdateBooth = Remotes:WaitForChild("UpdateBooth")
 
-    game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
+local http = game:GetService("HttpService")
+
+function update(text)
+    local args = {{
+        desc = text,
+        image = ""
+    }}
+    UpdateBooth:FireServer(unpack(args))
 end
+
 while true do
-    Response = game:HttpGet("http://localhost:8002")
-    coroutine.wrap(update)(Response)
+    local success, Response = pcall(function()
+        return game:HttpGet("http://localhost:8002", true)  -- true = no cache
+    end)
+    
+    if success and Response and Response ~= "" then
+        coroutine.wrap(update)(Response)
+    end
+    
+    task.wait(0.03)  -- ~33 updates per second - fast but stable
 end
